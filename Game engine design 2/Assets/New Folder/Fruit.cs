@@ -3,16 +3,21 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public abstract class Fruit : MonoBehaviour
 {
-    public GameManager manager;
+    protected GameManager manager;
 
     public abstract void GiveFruit();
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.tag == "Player")
+        if (collision.tag == "Player")
         {
             GiveFruit();
             Destroy(gameObject);
         }
+    }
+
+    protected void Start()
+    {
+        manager = FindAnyObjectByType<GameManager>();
     }
 }
